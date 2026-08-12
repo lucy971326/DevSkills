@@ -1,18 +1,48 @@
-# My Agent Skills
+# DevSkills
 
-这是我的个人开发 Skill 仓库。
+个人开发 Agent Skills，沉淀经过真实开发验证的工作流与约束，帮助 Agent 基于证据工作，减少脱离代码和单一上下文带来的错误判断。
 
-这里不收集泛泛的提示词，也不追求看起来很复杂的工作流；只沉淀在真实开发中反复验证过、能稳定提高 Agent 工作质量的技能、约束和工具。
+## 安装
 
-## 这个仓库解决什么
+### 交互式安装
 
-AI 在开发中最危险的失败方式，往往不是答不上来，而是给出一个自洽、完整、甚至看起来很高级，但脱离真实代码和约束的答案。
+运行命令，然后按提示选择 Skill、目标 Agent、安装范围和安装方式：
 
-因此，这里的 Skills 优先解决：
+```powershell
+npx skills add lucy971326/DevSkills
+```
 
-- 阅读框架源码时，用原始代码验证猜想，而不是顺着第一印象解释。
-- 设计或评审架构时，用真实约束和失败路径刺破“假好架构”。
-- 把反复出现的开发经验变成可复用、可版本管理的 Agent 工作流。
+在 Agent 选择界面使用：
+
+- `↑` / `↓`：移动
+- `Space`：选择或取消
+- `Enter`：确认
+
+### 指定安装
+
+例如，只安装 `dual-verify` 到 Codex 全局目录：
+
+```powershell
+npx skills add lucy971326/DevSkills --skill dual-verify --agent codex --global
+```
+
+查看仓库中的 Skills：
+
+```powershell
+npx skills add lucy971326/DevSkills --list
+```
+
+## 当前 Skills
+
+### `dual-verify`
+
+使用两个相互隔离的 Agent，从不同证据路径独立验证源码、架构设计和重要技术结论，再由主 Agent 交叉审核。
+
+使用示例：
+
+```text
+请使用 $dual-verify，独立验证这个框架源码调用链的真实行为。
+```
 
 ## 目录结构
 
@@ -20,26 +50,14 @@ AI 在开发中最危险的失败方式，往往不是答不上来，而是给�
 DevSkills/
 ├── README.md
 └── skills/
-    └── <skill-name>/
-        ├── SKILL.md          # Skill 的触发条件和核心工作流
-        ├── references/       # 按需加载的领域资料（可选）
-        └── scripts/          # 可重复执行的可靠工具（可选）
+    └── dual-verify/
+        ├── SKILL.md
+        └── agents/
+            └── openai.yaml
 ```
 
-一个 Skill 只解决一类明确问题。`SKILL.md` 保持短小、可执行；详细资料放进 `references/`，只有重复且需要确定性的操作才写进 `scripts/`。
+每个 Skill 至少包含一个带 YAML frontmatter 的 `SKILL.md`。
 
-## 当前 Skills
+## License
 
-| Skill | 用途 |
-| --- | --- |
-| [dual-verify](skills/dual-verify/SKILL.md) | 用隔离上下文和独立证据路径验证源码猜想、架构设计与重要技术结论，打破单一上下文的认知茧房。 |
-
-## 使用方式
-
-将需要的 Skill 目录复制或链接到目标项目的 `.codex/skills/` 下；也可以在支持 Skills 的 Agent 中显式引用其路径或名称。
-
-例如：
-
-```text
-请使用 $dual-verify，独立验证这个框架源码调用链的真实行为。
-```
+MIT
