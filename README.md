@@ -44,6 +44,16 @@ npx skills add lucy971326/DevSkills --list
 请使用 $dual-verify，独立验证这个框架源码调用链的真实行为。
 ```
 
+### `architect-3d`
+
+从经过源码锚定的运行时行为，生成可交互的 Three.js 三维架构认知地图，来理解心智模型；它展示功能域、能力房间、子模块和可步进的数据流，而不是文件依赖图。
+
+使用示例：
+
+```text
+请使用 $architect-3d，为这个项目生成交互式 3D 架构认知地图。
+```
+
 ## 目录结构
 
 ```text
@@ -51,6 +61,10 @@ DevSkills/
 ├── README.md
 └── skills/
     └── dual-verify/
+        ├── SKILL.md
+        └── agents/
+            └── openai.yaml
+    └── architect-3d/
         ├── SKILL.md
         └── agents/
             └── openai.yaml
