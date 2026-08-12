@@ -1,0 +1,4 @@
+interface:
+  display_name: "双源验证"
+  short_description: "使用两个隔离上下文，从不同证据路径独立核查重要技术结论"
+  default_prompt: "Use $dual-verify to independently verify this conclusion from two evidence paths."
